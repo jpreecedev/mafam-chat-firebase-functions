@@ -1,5 +1,7 @@
 "use strict";
 
+require("promise-polyfill/src/polyfill");
+
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const parseMessages = require("./parseMessages").parseMessages;
