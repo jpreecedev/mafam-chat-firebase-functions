@@ -57,8 +57,8 @@ exports.sendChatMessageNotification = functions.database
           }
         };
 
-        console.log("Sending notification", payload);
-        console.log("Sending to ...", tokens);
+        console.log("Sending notification", JSON.stringify(payload));
+        console.log("Sending to ...", JSON.stringify(tokens));
 
         return admin
           .messaging()
