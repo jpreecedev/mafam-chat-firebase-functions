@@ -53,7 +53,8 @@ exports.sendChatMessageNotification = functions.database
           notification: {
             title: `New message from ${lastMessage.senderName}`,
             body: lastMessage.content,
-            icon: lastMessage.avatar
+            icon: lastMessage.avatar,
+            link: `https://mafam.chat/chat/${chatUid}`
           }
         };
 
