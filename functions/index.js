@@ -13,14 +13,12 @@ exports.sendChatMessageNotification = functions.database
   .onWrite((change, context) => {
     console.log("A write operation has happened.");
 
-    let chatRef;
-
     return new Promise((resolve, reject) => {
       const chatUid = context.params.chatUid;
 
       // Get list of participants
-      chatRef = admin.database().ref(`/chats/${chatUid}`);
-      chatRef.on("value", async snapshot => {
+      const chatRef = admin.database().ref(`/chats/${chatUid}`);
+      chatRef.once("value", async snapshot => {
         console.log("The snapshot change was triggered");
 
         const participants = snapshot.val().participants;
@@ -66,8 +64,7 @@ exports.sendChatMessageNotification = functions.database
           .messaging()
           .sendToDevice(tokens, payload)
           .then(resolve)
-          .catch(reject)
-          .finally(() => chatRef.off("value"));
+          .catch(reject);
       });
     });
   });
